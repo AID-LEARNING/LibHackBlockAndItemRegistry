@@ -50,7 +50,7 @@ class HackRegisterBlock
             $deserializerProperty = new ReflectionProperty($instance, "deserializeFuncs");
             $deserializerProperty->setAccessible(true);
             $value = $deserializerProperty->getValue($instance);
-            $value[$id->getTypeId()] = $deserializer;
+            $value[$id] = $deserializer;
             $deserializerProperty->setValue($instance, $value);
         }
     }
