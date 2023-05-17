@@ -1,0 +1,6 @@
+name: LibHackBlockAndItemRegistry
+author: SenseiTarzan
+api: 5.0.0
+version: 1.0.0
+description: "Allows to overwrite elements and blocks in pm5 in the serializer and deserialize it, but also in the BlockFactory"
+antigen: SenseiTarzan\HackBlockAndItemRegistry
