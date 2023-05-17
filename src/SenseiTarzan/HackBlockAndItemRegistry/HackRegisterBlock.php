@@ -36,24 +36,21 @@ class HackRegisterBlock
     }
 
     /**
-     * @param Block $block
+     * @param Block $id
      * @param \Closure $deserializer
      * @return void
      * @throws ReflectionException
      */
-    public static function registerBlockDeserializer(Block $block, \Closure $deserializer): void
+    public static function registerBlockDeserializer(string $id, \Closure $deserializer): void
     {
         $instance = GlobalBlockStateHandlers::getDeserializer();
         try {
-            $instance->map($block, $deserializer);
+            $instance->map($id, $deserializer);
         } catch (InvalidArgumentException) {
             $deserializerProperty = new ReflectionProperty($instance, "deserializeFuncs");
             $deserializerProperty->setAccessible(true);
             $value = $deserializerProperty->getValue($instance);
-            if (isset($value[$block->getTypeId()])) {
-                $value[$block->getTypeId()] = [];
-            }
-            $value[$block->getTypeId()] = $deserializer;
+            $value[$id->getTypeId()] = $deserializer;
             $deserializerProperty->setValue($instance, $value);
         }
     }
@@ -65,11 +62,11 @@ class HackRegisterBlock
      * @return void
      * @throws ReflectionException
      */
-    public static function registerBlockAndSerializerAndDeserializer(Block $block, \Closure $serializer, \Closure $deserializer): void
+    public static function registerBlockAndSerializerAndDeserializer(Block $block, string $id, \Closure $serializer, \Closure $deserializer): void
     {
         self::registerRuntimeBlockStateRegistry($block);
         self::registerBlockSerializer($block, $serializer);
-        self::registerBlockDeserializer($block, $deserializer);
+        self::registerBlockDeserializer($id, $deserializer);
     }
 
     /**
