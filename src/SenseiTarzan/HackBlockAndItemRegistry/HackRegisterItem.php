@@ -28,10 +28,7 @@ class HackRegisterItem
             $serializerProperty = new \ReflectionProperty($instance, "itemSerializers");
             $serializerProperty->setAccessible(true);
             $value = $serializerProperty->getValue($instance);
-            if (isset($value[$item->getTypeId()])) {
-                $value[$item->getTypeId()] = [];
-            }
-            $value[$item->getTypeId()][get_class($item)] = $serializer;
+            $value[$item->getTypeId()]= $serializer;
             $serializerProperty->setValue($instance, $value);
         }
 
@@ -52,10 +49,7 @@ class HackRegisterItem
             $serializerProperty = new \ReflectionProperty($instance, "blockItemSerializers");
             $serializerProperty->setAccessible(true);
             $value = $serializerProperty->getValue($instance);
-            if (isset($value[$itemBlock->getTypeId()])) {
-                $value[$itemBlock->getTypeId()] = [];
-            }
-            $value[$itemBlock->getTypeId()][get_class($itemBlock)] = $serializer;
+            $value[$itemBlock->getTypeId()]= $serializer;
             $serializerProperty->setValue($instance, $value);
         }
     }

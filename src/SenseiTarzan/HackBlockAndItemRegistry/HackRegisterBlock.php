@@ -27,10 +27,7 @@ class HackRegisterBlock
             $serializerProperty = new ReflectionProperty($instance, "serializers");
             $serializerProperty->setAccessible(true);
             $value = $serializerProperty->getValue($instance);
-            if (isset($value[$block->getTypeId()])) {
-                $value[$block->getTypeId()] = [];
-            }
-            $value[$block->getTypeId()][get_class($block)] = $serializer;
+            $value[$block->getTypeId()] = $serializer;
             $serializerProperty->setValue($instance, $value);
         }
     }
