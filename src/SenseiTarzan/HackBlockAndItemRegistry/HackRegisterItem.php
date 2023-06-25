@@ -66,7 +66,7 @@ class HackRegisterItem
         try {
             $instance->map($id, $deserializer);
         } catch (InvalidArgumentException) {
-            $deserializerProperty = new \ReflectionProperty($instance, "itemDeserializers");
+            $deserializerProperty = new \ReflectionProperty($instance, "deserializers");
             $deserializerProperty->setAccessible(true);
             $value = $deserializerProperty->getValue($instance);
             $value[$id] = $deserializer;
