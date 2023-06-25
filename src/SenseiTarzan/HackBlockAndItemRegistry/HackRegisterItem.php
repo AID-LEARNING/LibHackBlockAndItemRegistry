@@ -66,7 +66,7 @@ class HackRegisterItem
         try {
             $instance->map($id, $deserializer);
         } catch (InvalidArgumentException) {
-            $deserializerProperty = new \ReflectionProperty($instance, "itemDeserializers");
+            $deserializerProperty = new \ReflectionProperty($instance, "deserializers");
             $deserializerProperty->setAccessible(true);
             $value = $deserializerProperty->getValue($instance);
             $value[$id] = $deserializer;
@@ -74,13 +74,13 @@ class HackRegisterItem
         }
     }
 
-    public static function reisterSerializerAndDeserializerItem(Item $item, string $id, Closure $serializer, Closure $deserializer): void
+    public static function registerSerializerAndDeserializerItem(Item $item, string $id, Closure $serializer, Closure $deserializer): void
     {
         self::registerSerializerItem($item, $serializer);
         self::registerDeserializerItem($id, $deserializer);
     }
 
-    public static function reisterSerializerAndDeserializerItemBlock(ItemBlock $itemBlock, string $id, Closure $serializer, Closure $deserializer): void
+    public static function registerSerializerAndDeserializerItemBlock(ItemBlock $itemBlock, string $id, Closure $serializer, Closure $deserializer): void
     {
         self::registerSerializerItemBlock($itemBlock, $serializer);
         self::registerDeserializerItem($id, $deserializer);
