@@ -46,6 +46,6 @@ class HackRegisterItem
     public static function registerSerializerAndDeserializerItem(Item|ItemBlock $item, string $id, Closure $serializer, Closure $deserializer): void
     {
         foreach ([[true, $serializer], [false, $deserializer]] as [$isSerializer, $closure])
-            $this->registerItem($item, $isSerializer ? $isSerializer ? $item->getTypeId() : $id, $closure, $isSerializer);
+            self::registerItem($item, $isSerializer ? $isSerializer ? $item->getTypeId() : $id, $closure, $isSerializer);
     }
 }
